@@ -19,4 +19,43 @@ $(function () {
         },
     });
 
+    var layer = layui.layer;
+    $('#form-reg').on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'post',
+            url: 'http://www.liulongbin.top:3007/api/reguser',
+            data: $(this).serialize(),
+            success: function (res) {
+                if (res.status !== 0) {
+                    return layer.msg(res.message);
+                }
+                layer.msg('注册成功，请登录');
+                $('#link-login').click();
+            }
+        });
+    });
+
+    $('#form-login').on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'post',
+            url: 'http://www.liulongbin.top:3007/api/login',
+            data: $(this).serialize(),
+            success: function (res) {
+                if (res.status !== 0) {
+                    return layer.msg('登录失败');
+                }
+                layer.msg('登录成功');
+                localStorage.setItem('token', res.token);
+                location.href = '/index.html';
+            }
+        });
+    });
+
+
+
+
+
+
 });
