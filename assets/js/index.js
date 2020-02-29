@@ -25,7 +25,7 @@ function randerAvatar(user) {
     $('#welcome').html('欢迎&nbsp;&nbsp;' + name);
     if (user.user_pic) {
         //渲染图像
-        $('.layui-nav-img').show();
+        $('.layui-nav-img').attr('src', user.user_pic).show();
         $('.text-avatar').hide();
 
     } else {
